@@ -3,10 +3,13 @@ package com.example.a16033760.demolistview;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,5 +36,17 @@ public class MainActivity extends AppCompatActivity {
         //  each row and the food String array together
         aa = new FoodAdapter(this, R.layout.row, food);
         lv.setAdapter(aa);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Food selectedFood = food.get(position);
+
+                Toast.makeText(MainActivity.this, selectedFood.getName()
+                                + " Star: " + selectedFood.isStar(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
